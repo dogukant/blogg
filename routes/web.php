@@ -1,14 +1,34 @@
 <?php
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Backend Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
+*/
+Route::prefix('admin')->name('admin.')->middleware('isLogin')->group(function(){
+    Route::get('giris', 'App\Http\Controllers\Back\AuthController@login')->name('login');
+    Route::post('giris', 'App\Http\Controllers\Back\AuthController@loginPost')->name('login.post');
+});
+
+Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function(){
+    Route::get('panel','App\Http\Controllers\Back\Dashboard@index')->name('dashboard');
+    //MAKALE ROUTE'S
+    Route::get('makaleler/silinenler','App\Http\Controllers\Back\ArticleController@trashed')->name('trashed.article');
+    Route::resource('makaleler','App\Http\Controllers\Back\ArticleController');
+    Route::get('/switch/','App\Http\Controllers\Back\ArticleController@switch')->name('switch');
+    Route::get('/deletearticle/{id}','App\Http\Controllers\Back\ArticleController@delete')->name('delete.article');
+    Route::get('/harddeletearticle/{id}','App\Http\Controllers\Back\ArticleController@hardDelete')->name('hard.delete.article');
+    Route::get('/recoverarticle/{id}','App\Http\Controllers\Back\ArticleController@recover')->name('recover.article');
+    //CATEGORY ROUTE'S
+    Route::get('/kategoriler','App\Http\Controllers\Back\CategoryController@index')->name('category.index');
+    Route::get('cikis','App\Http\Controllers\Back\AuthController@logout')->name('logout');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Front Routes
+|--------------------------------------------------------------------------
 */
 
 Route::get('/','App\Http\Controllers\Front\Homepage@index')->name('homepage');
@@ -16,9 +36,8 @@ Route::get('yazilar/sayfa','App\Http\Controllers\Front\Homepage@index');
 Route::get('/iletisim','App\Http\Controllers\Front\Homepage@contact')->name('contact');
 Route::post('/iletisim','App\Http\Controllers\Front\Homepage@contactpost')->name('contact.post');
 Route::get('/kategori/{category}','App\Http\Controllers\Front\Homepage@category')->name('category');
-Route::get('/{category}/{slug}','App\Http\Controllers\Front\Homepage@single')->name('single');
+Route::get('/sayfa/{slug}','App\Http\Controllers\Front\Homepage@single')->name('single');
 Route::get('/{sayfa}','App\Http\Controllers\Front\Homepage@page')->name('page');
-
 
 
 

@@ -7,11 +7,7 @@
     ?>
 {{$page->content}}
 
-//
 @endsection
-
-
-
 
 <!-- Main Content-->
 <main class="mb-4">

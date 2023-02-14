@@ -5,7 +5,7 @@ use Illuminate\Support\Str;
 @foreach ($articles as $article)
     <!-- Post preview-->
     <div class="post-preview">
-        <a href="{{route('single',[$article->getCategory->slug,$article->slug])}}">
+        <a href="{{route('single',[$article->slug])}}">
             <img src="{{$article->image}}" />
             <h2 class="post-title">{{$article->title}}</h2>
             <h3 class="post-subtitle">{{str::limit($article->content,50)}}</h3>

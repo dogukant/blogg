@@ -3,23 +3,37 @@
 @section('bg','http://ajansnigde.com/resimler/icerikler/89235.jpg')
 @section('content')
 <!-- Main Content-->
-//
 <main class="mb-4">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                 <p>İletişime Geçin</p>
                 <div class="my-5">
 
                     <form method="post" action="{{route('contact.post')}}" ">
                      @csrf
                         <div class="form-floating">
-                            <input class="form-control" name="name" type="text" placeholder="Adınız" data-sb-validations="required" />
+                            <input class="form-control" name="name" type="text" placeholder="Adınız" data-sb-validations="" />
                             <label>Ad Soyad</label>
                             <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                         </div>
                         <div class="form-floating">
-                            <input class="form-control" name="mail" type="email" placeholder="Mail adresiniz" data-sb-validations="required" />
+                            <input class="form-control" name="email" type="email" placeholder="Mail adresiniz" data-sb-validations="" />
                             <label>Mail Adresi</label>
 
                         </div>
@@ -33,9 +47,9 @@
                             </select>
                         </div>
                         <div class="form-floating">
-                            <textarea class="form-control" name="mesaj" placeholder="Mesajınız" style="height: 12rem" data-sb-validations="required"></textarea>
+                            <textarea class="form-control" name="message" placeholder="Mesajınız" style="height: 12rem" data-sb-validations=""></textarea>
                             <label for="message">Mesaj</label>
-                            <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                            <div class="invalid-feedback" data-sb-feedback="message:">A message is required.</div>
                         </div>
                             </div>
                         <br />
