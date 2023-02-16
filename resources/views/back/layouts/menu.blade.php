@@ -45,14 +45,12 @@
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link" href="{{route('admin.category.index')}}"
+            <a class="nav-link" @if(Request::segment(2)=="kategoriler") style="color:white !important;" @endif href="{{route('admin.category.index')}}"
                aria-expanded="true">
-                <i class="fas fa-fw fa-list"></i>
+                <i @if(Request::segment(2)=="kategoriler") style="color:white !important;" @endif class="fas fa-fw fa-list"></i>
                 <span>Kategoriler</span>
             </a>
-
         </li>
-
         <!-- Divider -->
         <hr class="sidebar-divider">
 

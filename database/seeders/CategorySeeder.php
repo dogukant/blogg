@@ -16,14 +16,14 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $categories=['Eğlence','Bilişim','Gezi','Teknoloji','Sağlık','Spor','Günlük Yaşam'];
+        $categories=['Genel','Eğlence','Bilişim','Gezi','Teknoloji','Sağlık','Spor','Günlük Yaşam'];
         foreach($categories as $category){
         DB::table('categories')->insert([
             'name'=>$category,
             'slug'=>Str::slug($category),
             'created_at'=>Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at'=>Carbon::now()->format('Y-m-d H:i:s'),
-            
+
          ]);
         }
     }
